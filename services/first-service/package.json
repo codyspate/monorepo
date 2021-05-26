@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "unit": "jest -c jest.config.unit.js",
-    "deploy": "echo 'beep beep boop... deploying...'"
+    "deploy": "echo 'beep beep boop... deploying to STAGE:' $STAGE"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
