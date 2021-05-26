@@ -42,7 +42,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node
         with:
-          node-version: 12.x
+          node-version: '12'
       - name: Install dependencies
         working-directory: ${{env.working-directory}}
         run: yarn install
