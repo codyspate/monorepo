@@ -1,8 +1,10 @@
 name: Deploy - First Service
+
 on: 
-  push:
+  release:
     paths:
       - 'services/first-service/**'
+
 
 
 
