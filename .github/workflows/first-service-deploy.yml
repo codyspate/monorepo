@@ -51,7 +51,7 @@ jobs:
         working-directory: ${{env.working-directory}}
         run: yarn deploy
         
-  deploy-to-prod:
+  deploy-to-dev:
     needs: test
     if: endsWith(github.ref, '/dev')
     runs-on: ubuntu-latest
