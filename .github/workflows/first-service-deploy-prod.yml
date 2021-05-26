@@ -1,0 +1,52 @@
+name: Deploy to Production
+on: 
+  push: 
+    branches:
+      - 'main'
+    paths:
+      - 'services/first-service/**'
+
+
+
+jobs: 
+  test: 
+    runs-on: ubuntu-latest
+    env:
+      working-directory: 'services/first-service'
+    
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        working-directory: ${{env.working-directory}}
+        run: yarn install
+      - name: Unit tests
+        working-directory: ${{env.working-directory}}
+        run: yarn unit
+      - name: Deploy
+        working-directory: ${{env.working-directory}}
+        run: yarn deploy
+  deploy:
+    needs: test
+    environment: Production
+    runs-on: ubuntu-latest
+    env:
+      working-directory: 'services/first-service'
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        working-directory: ${{env.working-directory}}
+        run: yarn install
+      - name: Deploy
+        working-directory: ${{env.working-directory}}
+        run: yarn deploy
+        

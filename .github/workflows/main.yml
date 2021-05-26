@@ -1,11 +1,11 @@
-name: monorepo-actions
+name: main
 on: 
   push: 
     branches:
       - 'main'
 
 jobs: 
-  test: 
+  deploy: 
     runs-on: ubuntu-latest
 
     strategy:
