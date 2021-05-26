@@ -5,7 +5,8 @@
   "author": "Cody Spate",
   "license": "MIT",
   "scripts": {
-    "unit": "jest -c jest.config.unit.js"
+    "unit": "jest -c jest.config.unit.js",
+    "deploy": "echo 'beep beep boop... deploying...'"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
