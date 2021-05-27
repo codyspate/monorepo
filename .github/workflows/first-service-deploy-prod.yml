@@ -2,6 +2,7 @@ name: Deploy Prod - First Service
 
 on: 
   release:
+    types: [published]
     paths:
       - 'services/first-service/**'
 
