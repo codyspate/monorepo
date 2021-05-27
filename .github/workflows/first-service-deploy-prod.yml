@@ -1,31 +1,17 @@
 name: First Service - Deploy Prod
 
 on: 
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
     paths:
-      - 'services/first-service/**'
+      - services/first-service/**
 
 
 
 
 jobs: 
-  check:
-    name: Check files
-    outputs:
-      run_job: ${{ steps.check_files.outputs.run_job }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-      - name: Check modified files
-        id: check_files
-        run: ./.github/scripts/check-for-changes.sh services/first-service/*
   test:
-    needs: check
-    if: needs.check.outputs.run_job == 'true'
     runs-on: ubuntu-latest
     env:
       working-directory: 'services/first-service'
@@ -42,7 +28,6 @@ jobs:
       - name: Unit tests
         working-directory: ${{env.working-directory}}
         run: yarn unit
-
   deploy-to-prod:
     needs: test
     environment: Production

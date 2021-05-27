@@ -1,0 +1,14 @@
+name: Create Release
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs: 
+  create-release:
+      steps:
+        - name: Semver Release
+          uses: K-Phoen/semver-release-action@v1.2.0
+          with: 
+            release-branch: main
