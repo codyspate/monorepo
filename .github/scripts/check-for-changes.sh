@@ -30,8 +30,8 @@ git diff --name-only $previousRelease HEAD > files.txt
 while IFS= read -r file
 do
 echo $file
-if [[ $file != $0 ]]; then
-    echo "This modified file is not under the '$0' folder."
+if [[ $file != $1 ]]; then
+    echo "This modified file is not under the '$1' folder."
     echo "::set-output name=run_job::false"
     break
 else
