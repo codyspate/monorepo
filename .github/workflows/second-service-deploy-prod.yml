@@ -19,8 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 3
-      - run: 
+          fetch-depth: 3 
       - name: Check modified files
         id: check_files
         run: ./.github/scripts/check-for-changes.sh services/second-service/*
