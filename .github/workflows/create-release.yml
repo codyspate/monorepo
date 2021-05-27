@@ -7,8 +7,9 @@ on:
 
 jobs: 
   create-release:
-      steps:
-        - name: Semver Release
-          uses: K-Phoen/semver-release-action@v1.2.0
-          with: 
-            release-branch: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Semver Release
+        uses: K-Phoen/semver-release-action@v1.2.0
+        with: 
+          release-branch: main
