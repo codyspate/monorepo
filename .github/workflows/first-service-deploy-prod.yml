@@ -1,4 +1,4 @@
-name: Deploy - First Service
+name: Deploy Prod - First Service
 
 on: 
   release:
@@ -32,7 +32,6 @@ jobs:
 
   deploy-to-prod:
     needs: test
-    if: endsWith(github.ref, '/main')
     environment: Production
     runs-on: ubuntu-latest
     env:
@@ -42,28 +41,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Set stage to prod
         run: export STAGE=prod
-      - name: Setup
-        uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-      - name: Install dependencies
-        working-directory: ${{env.working-directory}}
-        run: yarn install
-      - name: Deploy
-        working-directory: ${{env.working-directory}}
-        run: yarn deploy
-        
-  deploy-to-dev:
-    needs: test
-    if: endsWith(github.ref, '/dev')
-    runs-on: ubuntu-latest
-    env:
-      working-directory: 'services/first-service'
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set stage to dev
-        run: export STAGE=dev
       - name: Setup
         uses: actions/setup-node@v2
         with:

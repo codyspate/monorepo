@@ -1,4 +1,4 @@
-name: Deploy - First Service
+name: Deploy Devint01 - First Service
 
 on: 
   push:
