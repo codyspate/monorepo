@@ -12,5 +12,6 @@ jobs:
       - name: Semver Release
         uses: K-Phoen/semver-release-action@v1.2.0
         with: 
-          token: ${{ secrets.GITHUB_TOKEN }}
           release_branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
