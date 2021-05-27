@@ -4,7 +4,7 @@
     "services/*"
   ],
   "private": true,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "index.js",
   "repository": "git@github.com:codyspate/monorepo.git",
   "author": "Cody Spate <codyspate@gmail.com>",
