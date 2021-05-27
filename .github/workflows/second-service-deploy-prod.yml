@@ -3,25 +3,19 @@ name: Second Service - Deploy Prod
 on: 
   release:
     types: [published]
-    paths:
-      - 'services/second-service/**'
 
 
 
 
 jobs:
   check:
-    name: Check files
-    outputs:
-      run_job: ${{ steps.check_files.outputs.run_job }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 3 
-      - name: Check modified files
-        id: check_files
+          fetch-depth: 3
+      - name: Check for changes
         run: ./.github/scripts/check-for-changes.sh services/second-service/*
   test:
     needs: check
@@ -30,6 +24,10 @@ jobs:
     env:
       working-directory: 'services/second-service'
     steps: 
+      - name: Wait For Check
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        with:
+          checkName: Create Release
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup

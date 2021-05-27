@@ -1,0 +1,17 @@
+name: Create Release
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs: 
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Semver Release
+        uses: K-Phoen/semver-release-action@v1.2.0
+        with: 
+          release_branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
