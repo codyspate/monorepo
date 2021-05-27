@@ -24,11 +24,25 @@ jobs:
       - name: check modified files
         id: check_files
         run: |
+          echo "================== get last release ==================="
+          git ls-remote --tags --sort="-v:refname" > releases.txt
+          while IFS= read -r release
+          previousRelease=-1
+          do
+            
+            if [[ $release == *"release-"* ]]; then
+              echo "Previous release: " $release
+              r=($release)
+              previousRelease=${r[0]}
+              echo "Previous release hash: " $previousRelease
+              break
+            fi
+          done < releases.txt
           echo "=============== list modified files ==============="
-          git diff --name-only HEAD^ HEAD
+          git diff --name-only previousRelease HEAD
           
           echo "========== check paths of modified files =========="
-          git diff --name-only HEAD^ HEAD > files.txt
+          git diff --name-only previousRelease HEAD > files.txt
           while IFS= read -r file
           do
             echo $file
