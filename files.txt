@@ -1,2 +1,3 @@
-.github/workflows/first-service-deploy-prod.yml
+.github/scripts/check-for-changes.sh
 package.json
+releases.txt
