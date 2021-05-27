@@ -3,15 +3,23 @@ name: Second Service - Deploy Prod
 on: 
   release:
     types: [published]
-    paths:
-      - 'services/second-service/**'
 
 
 
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - name: Check for changes
+        run: ./.github/scripts/check-for-changes.sh services/second-service/*
   test:
-    
+    needs: check
+    if: needs.check.outputs.run_job == 'true'
     runs-on: ubuntu-latest
     env:
       working-directory: 'services/second-service'
