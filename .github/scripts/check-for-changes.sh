@@ -7,10 +7,12 @@ previousRelease=-1
 while IFS= read -r release
 do
 echo $release
-if [[ $release == *"release-"* ]]; then
+if [[ previousRelease == 0 ]]; then
     echo "Previous release: " $release
     previousRelease=$release
     break
+elif [[ $release == *"release-"* ]]; then
+    previousRelease=0
 fi
 done < releases.txt
 
