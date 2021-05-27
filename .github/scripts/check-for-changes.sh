@@ -16,7 +16,7 @@ elif [[ $release == *"release-"* ]]; then
 fi
 done < releases.txt
 
-if [[ $previousRelease == -1 ]]; then
+if [[ $previousRelease == -1 || $previousRelease == 0 ]]; then
     echo "Previous release not found"
     exit 1
 fi
