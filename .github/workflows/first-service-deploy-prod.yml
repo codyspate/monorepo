@@ -1,26 +1,30 @@
 name: First Service - Deploy Prod
 
 on: 
-  push:
-    branches:
-      - main
-    paths:
-      - services/first-service/**
+  release:
+    types:
+      - published
 
 
 
 
 jobs: 
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - name: Check for changes
+        run: ./.github/scripts/check-for-changes.sh services/first-service/*
   test:
+    needs: check
+    if: needs.check.outputs.run_job == 'true'
     runs-on: ubuntu-latest
     env:
       working-directory: 'services/first-service'
     steps: 
-      - name: Wait For Check
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        with:
-          checkName: Create Release
-
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
