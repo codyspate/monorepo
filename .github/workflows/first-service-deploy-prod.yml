@@ -15,9 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 3
+          fetch-depth: 2
       - name: Check for changes
-        run: ./.github/scripts/check-for-changes.sh services/first-service/*
+        run: ./.github/scripts/check-for-changes.sh "services/first-service/*"
   test:
     needs: check
     if: needs.check.outputs.run_job == 'true'
