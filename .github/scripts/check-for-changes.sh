@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo $1
 echo "================== get last release ==================="
 git tag -l --sort="-v:refname" > releases.txt
 previousRelease=-1
