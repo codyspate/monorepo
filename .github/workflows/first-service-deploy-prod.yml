@@ -16,6 +16,11 @@ jobs:
     env:
       working-directory: 'services/first-service'
     steps: 
+      - name: Wait For Check
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        with:
+          checkName: Create Release
+
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
