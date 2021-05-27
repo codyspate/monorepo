@@ -27,9 +27,6 @@ jobs:
       - name: Unit tests
         working-directory: ${{env.working-directory}}
         run: yarn unit
-      - name: Deploy
-        working-directory: ${{env.working-directory}}
-        run: yarn deploy
 
   deploy-to-prod:
     needs: test
@@ -40,8 +37,6 @@ jobs:
     steps: 
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set stage to prod
-        run: export STAGE=prod
       - name: Setup
         uses: actions/setup-node@v2
         with:
@@ -51,4 +46,4 @@ jobs:
         run: yarn install
       - name: Deploy
         working-directory: ${{env.working-directory}}
-        run: yarn deploy
+        run: STAGE=prod yarn deploy
