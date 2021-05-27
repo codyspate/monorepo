@@ -1,11 +1,11 @@
-name: First Service - Deploy Devint01
+name: Second Service - Deploy Devint01
 
 on: 
   push:
     branches: 
       - 'integration'
     paths:
-      - 'services/first-service/**'
+      - 'services/second-service/**'
 
 
 
@@ -14,7 +14,7 @@ jobs:
   test: 
     runs-on: ubuntu-latest
     env:
-      working-directory: 'services/first-service'
+      working-directory: 'services/second-service'
     steps: 
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     env:
-      working-directory: 'services/first-service'
+      working-directory: 'services/second-service'
     steps: 
       - name: Checkout
         uses: actions/checkout@v2
