@@ -3,17 +3,15 @@ name: First Service - Deploy Prod
 on: 
   push:
     branches:
-      - 'main'
+      - main
     paths:
-      - 'services/first-service/**'
+      - services/first-service/**
 
 
 
 
 jobs: 
   test:
-    needs: check
-    if: needs.check.outputs.run_job == 'true'
     runs-on: ubuntu-latest
     env:
       working-directory: 'services/first-service'
@@ -30,7 +28,6 @@ jobs:
       - name: Unit tests
         working-directory: ${{env.working-directory}}
         run: yarn unit
-
   deploy-to-prod:
     needs: test
     environment: Production

@@ -10,26 +10,16 @@ on:
 
 
 jobs:
-  check:
-    name: Check files
-    outputs:
-      run_job: ${{ steps.check_files.outputs.run_job }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3 
-      - name: Check modified files
-        id: check_files
-        run: ./.github/scripts/check-for-changes.sh services/second-service/*
   test:
-    needs: check
-    if: needs.check.outputs.run_job == 'true'
+    
     runs-on: ubuntu-latest
     env:
       working-directory: 'services/second-service'
     steps: 
+      - name: Wait For Check
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        with:
+          checkName: Create Release
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
