@@ -12,4 +12,4 @@ jobs:
       - name: Semver Release
         uses: K-Phoen/semver-release-action@v1.2.0
         with: 
-          release-branch: main
+          release_branch: main
